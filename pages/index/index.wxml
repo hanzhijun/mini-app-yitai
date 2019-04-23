@@ -1,21 +1,26 @@
 <!--index.wxml-->
-<view class="container">
-  <!-- <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view> -->
-
-  <view>1234</view>
-  <navigator
-    url="/pages/login/login"
-    hover-class="navigator-hover"
-  >
-    跳转到新页面
-  </navigator>
+<view>
+    <view>您好，{{ userInfo }}</view>
+    <view>您监控的设备编号：{{ deviceNo }}</view>
+    <view>用户状态：
+        <text wx:if="{{ deviceStatus == 3 }}">离床</text>
+        <text wx:elif="{{ deviceStatus == 4 }}">在床</text>
+        <text wx:elif="{{ deviceStatus == 5 }}">光纤故障</text>
+        <text wx:elif="{{ deviceStatus == 6 }}">离线</text>
+        <text wx:elif="{{ deviceStatus == 9 }}">传感器负荷</text>
+        <text wx:elif="{{ deviceStatus == 10 }}">信号弱</text>
+        <text wx:else>未知错误</text>
+    </view>
+    <view>心率值：
+        <text wx:if="{{ heart == 65436 }}">--</text>
+        <text wx:else>{{ heart }}</text>
+    </view>
+    <view>呼吸值：
+        <text wx:if="{{ breath == -100 }}">--</text>
+        <text wx:else>{{ breath }}</text>
+    </view>
+    <view>体动值：
+        <text wx:if="{{ motion == -100 }}">--</text>
+        <text wx:else>{{ motion }}</text>
+    </view>
 </view>

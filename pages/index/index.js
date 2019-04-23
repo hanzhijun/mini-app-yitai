@@ -1,54 +1,61 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
+let Util = require('../../utils/storage.js');
 
 Page({
-  data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
+    data: {
+        userInfo: null,
+        deviceNo: '641743000773', // 设备号
+        breath: null, // 呼吸值 -100_⽆效值，其他为正常值
+        deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
+        heart: null, // ⼼率值 65436_⽆效值，其他为正常值
+        markTime: null, // 发⽣的时间戳
+        motion: null // 体动值 0_正常，3_轻微体动，4_中度体动，5_⼤幅体动，-100_⽆效值
+    },
+    onLoad() {
+        let accessToken = Util.getCookie('accessToken');
+        let userInfo = Util.getCookie('username');
+        console.log(accessToken);
+        if (!accessToken) {
+            wx.redirectTo({
+                url: '../login/login'
+            })
+        } else {
+            this.setData({
+                userInfo: userInfo
+            });
+            this.getActual()
         }
-      })
+    },
+    /**
+     * 获取设备当前的状态/⼼率/呼吸/体动数据
+     */
+    getActual() {
+        let obj = {
+            deviceNos: app.globalData.deviceNos
+        };
+        let _this = this;
+        app.myAjax2('post', '/device/physiology/actual', obj, function (res) {
+            if (res.retCode == '10000') {
+                console.log('请求成功');
+                _this.setData({
+                    breath: res.successData[0].breath,
+                    deviceStatus: res.successData[0].deviceStatus,
+                    heart: res.successData[0].heart,
+                    markTime: res.successData[0].markTime,
+                    motion: res.successData[0].motion
+                });
+            } else {
+                console.log('未知错误，请重新登录')
+            }
+            console.log(JSON.stringify(res))
+        }, function (reg) {
+            console.log(JSON.stringify(reg))
+        })
+    },
+    getDeviceInfo() {
+
     }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  }
-})
+});
+
