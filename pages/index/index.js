@@ -7,6 +7,7 @@ Page({
     data: {
         userInfo: null,
         deviceNo: '641743000773', // 设备号
+        accessToken: null,
         breath: null, // 呼吸值 -100_⽆效值，其他为正常值
         deviceStatus: null, // 设备状态 3_离床，4_在床，5_光纤故障，6_离线，9_传感器负荷，10_信号弱
         heart: null, // ⼼率值 65436_⽆效值，其他为正常值
@@ -25,7 +26,54 @@ Page({
             this.setData({
                 userInfo: userInfo
             });
-            this.getActual()
+            this.getActual();
+            this.setSocketTask()
+        }
+    },
+    setSocketTask() {
+        let socketOpen = false;
+        let socketMsgQueue = ['login', 'deviceStatus', 'healthData', 'paramError'];
+        wx.connectSocket({
+            url: 'ws://stream.darma.cn:18105/ws',
+            header: {
+                'content-type': 'application/json'
+            },
+            method: 'GET',
+            success(res) {
+                console.log(JSON.stringify(res))
+            },
+            fail(reg) {
+                console.log(JSON.stringify(reg))
+            },
+            complete(data) {
+                console.log(JSON.stringify(data))
+            }
+        });
+
+        wx.onSocketOpen(function (res) {
+            console.log(JSON.stringify(res));
+            socketOpen = true;
+            for (let i = 0; i < socketMsgQueue.length; i++) {
+                sendSocketMessage(socketMsgQueue[i])
+            }
+            socketMsgQueue = []
+        });
+        let _this = this;
+        function sendSocketMessage(msg) {
+            if (socketOpen) {
+                wx.sendSocketMessage({
+                    data: {
+                        msgType: msg,
+                        msgData: {
+                            token: _this.accessToken,
+                            subType: 'ALL',
+                            deviceNo: _this.deviceNo
+                        }
+                    }
+                })
+            } else {
+                socketMsgQueue.push(msg)
+            }
         }
     },
     /**
@@ -56,6 +104,6 @@ Page({
     },
     getDeviceInfo() {
 
-    }
+    },
 });
 
