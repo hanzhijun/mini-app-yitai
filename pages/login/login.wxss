@@ -1,1 +1,45 @@
 /* pages/login/login.wxss */
+
+.section {
+    overflow: hidden;
+    padding: 20rpx 0;
+}
+
+.section_title {
+    display: inline-block;
+    width: 200rpx;
+    line-height: 68rpx;
+    float: left;
+    font-size: 14px;
+    text-align: right;
+}
+
+.section_input {
+    display: inline-block;
+    width: 400rpx;
+    height: 66rpx;
+    line-height: 66rpx;
+    border: 1px solid #0099e9;
+    border-radius: 3px;
+    float: left;
+    font-size: 14px;
+    padding-left: 20rpx;
+}
+
+.section_center {
+    text-align: center;
+    padding-top: 50rpx;
+}
+
+.section_post {
+    display: inline-block;
+    width: 500rpx;
+    font-size: 16px;
+    background-color: #0099e9;
+    color: #fff;
+    margin: 0 auto;
+}
+
+.section_post:active {
+    background-color: #0082c5;
+}

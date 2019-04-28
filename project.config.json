@@ -14,7 +14,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.6.1",
 	"appid": "wxf5ccbd7ab42822e7",
-	"projectname": "YitaiMedical",
+	"projectname": "mini-app-yitai",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

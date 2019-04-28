@@ -1,15 +1,15 @@
 <!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
-<view class="section">
-  <view class="section_title">用户名：{{inputValue}}</view>
-  <input bindinput="bindKeyInput" placeholder="输入同步到view中" />
+
+<view class="section" style="padding-top: 100rpx">
+  <view class="section_title">用户名：</view>
+  <input class="section_input" type="text" bindinput="bindKeyInput" placeholder="输入用户名" />
 </view>
 
 <view class="section">
-  <view class="section_title">密码：{{inputPassWords}}</view>
-  <input bindinput="bindPassInput" placeholder="输入同步到view中" />
+  <view class="section_title">密　码：</view>
+  <input class="section_input" type="password" bindinput="bindPassInput" placeholder="输入密码" />
 </view>
 
-<view class="section">
-  <button bindtap="toLogin">登录</button>
+<view class="section_center">
+  <button class="section_post" bindtap="toLogin">登录</button>
 </view>
