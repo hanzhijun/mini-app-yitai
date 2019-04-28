@@ -13,27 +13,18 @@ Page({
   onReady() {
   },
   onShow() {
-    // let accessToken = Util.getCookie('accessToken');
-    // let userInfo = Util.getCookie('username');
-    // let _this = this;
-    // if (!accessToken) {
-    //   wx.redirectTo({
-    //     url: '../login/login'
-    //   })
-    // } else {
-    //   this.setData({
-    //     userInfo: userInfo,
-    //     accessToken: accessToken
-    //   });
-    //   _this.getActual();
-    //   // _this.getBatch();
-    //
-    //   // _this.data.timer = setInterval(function () {
-    //   //   _this.getActual()
-    //   // }, 5000);
-    //
-    //   _this.setSocketTask();
-    // }
+    let accessToken = Util.getCookie('accessToken');
+    setTimeout(function() {
+      if (!accessToken) {
+        wx.redirectTo({
+          url: '../login/login'
+        })
+      } else {
+        wx.redirectTo({
+          url: '../detail/detail'
+        })
+      }
+    },500);
   },
   onHide() {
     clearInterval(this.data.timer)

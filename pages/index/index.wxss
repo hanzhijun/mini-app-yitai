@@ -4,8 +4,25 @@ view {
   text-align: left;
 }
 
-.index_outside {
-    line-height: 70rpx;
-    font-size: 14px;
-    padding: 80rpx 0 0 50rpx;
+.detail_outside .logo {
+  text-align: center;
+  padding: 180rpx 0 0 50rpx;
+}
+
+.detail_outside image {
+  width: 300rpx;
+  height: 180rpx;
+  margin: 0 auto;
+}
+
+.detail_outside ul,
+.detail_outside li {
+  display: block;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  text-align: center;
+}
+
+.detail_outside ul {
+  padding: 380rpx 0 0 0;
 }

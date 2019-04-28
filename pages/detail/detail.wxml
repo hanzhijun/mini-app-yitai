@@ -1,8 +1,8 @@
 <!--index.wxml-->
 <view class="index_outside">
-    <view>您好，{{ userInfo }}</view>
-    <view>您监控的设备编号：{{ deviceNo }}</view>
-    <view>用户状态：
+    <view class="text">您好，{{ userInfo }}</view>
+    <view class="text">您监控的设备编号：{{ deviceNo }}</view>
+<!--    <view>用户状态：
         <text wx:if="{{ deviceStatus == 3 }}">离床</text>
         <text wx:elif="{{ deviceStatus == 4 }}">在床</text>
         <text wx:elif="{{ deviceStatus == 5 }}">光纤故障</text>
@@ -12,11 +12,11 @@
         <text wx:else>未知错误</text>
     </view>
     <view>心率值：
-        <text wx:if="{{ heart == 65436 }}">--</text>
+        <text wx:if="{{ heart == 65436 }}">&#45;&#45;</text>
         <text wx:else>{{ heart }}</text>
     </view>
     <view>呼吸值：
-        <text wx:if="{{ breath == -100 }}">--</text>
+        <text wx:if="{{ breath == -100 }}">&#45;&#45;</text>
         <text wx:else>{{ breath }}</text>
     </view>
     <view>体动值：
@@ -24,6 +24,45 @@
         <text wx:elif="{{ motion == 3 }}">轻微体动</text>
         <text wx:elif="{{ motion == 4 }}">中度体动</text>
         <text wx:elif="{{ motion == 5 }}">⼤幅体动</text>
-        <text wx:else>--</text>
-    </view>
+        <text wx:else>&#45;&#45;</text>
+    </view>-->
+
+    <ul class="detail-bar">
+
+        <li class="icon">
+            <view>
+                <image src="http://www.hanjiaxin.cn/images/xin-on.png" wx:if="{{ deviceStatus == 4 }}"></image>
+                <image src="http://www.hanjiaxin.cn/images/xin-off.png" wx:else></image>
+            </view>
+            <view>
+                <image src="http://www.hanjiaxin.cn/images/chuang-on.png" wx:if="{{ deviceStatus == 4 }}"></image>
+                <image src="http://www.hanjiaxin.cn/images/chuang-off.png" wx:else></image>
+            </view>
+            <view>
+                <image src="http://www.hanjiaxin.cn/images/fei-on.png" wx:if="{{ deviceStatus == 4 }}"></image>
+                <image src="http://www.hanjiaxin.cn/images/fei-off.png" wx:else></image>
+            </view>
+        </li>
+
+        <li class="num">
+            <view>
+                <text wx:if="{{ heart == 65436 }}">--</text>
+                <text wx:else>{{ heart }}</text>
+            </view>
+            <view>
+                <text wx:if="{{ deviceStatus == 3 }}">离床</text>
+                <text wx:elif="{{ deviceStatus == 4 }}">在床</text>
+                <text wx:elif="{{ deviceStatus == 5 }}">光纤故障</text>
+                <text wx:elif="{{ deviceStatus == 6 }}">离线</text>
+                <text wx:elif="{{ deviceStatus == 9 }}">传感器负荷</text>
+                <text wx:elif="{{ deviceStatus == 10 }}">信号弱</text>
+                <text wx:else>未知错误</text>
+            </view>
+            <view>
+                <text wx:if="{{ breath == -100 }}">--</text>
+                <text wx:else>{{ breath }}</text>
+            </view>
+        </li>
+
+    </ul>
 </view>

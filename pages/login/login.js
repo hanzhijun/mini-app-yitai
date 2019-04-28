@@ -41,7 +41,7 @@ Page({
                 Util.putCookie('accessToken', res.successData.accessToken, 3600);
                 Util.putCookie('username', res.successData.username, 3600);
                 wx.navigateTo({
-                    url: '../index/index'
+                    url: '../detail/detail'
                 })
             } else if (res.retCode == '10007') {
                 console.log('⽤户名或密码错误')
@@ -112,4 +112,5 @@ Page({
     onShareAppMessage: function () {
 
     }
-})
+});
+
