@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/welcome/welcome",
     "pages/detail/detail",
+    "pages/record/record",
+    "pages/setting/setting",
     "pages/login/login"
   ],
   "window": {
@@ -9,5 +11,30 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#0099e9",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/detail/detail",
+        "text": "状态",
+        "iconPath": "/images/jiankong-off.png",
+        "selectedIconPath": "/images/jiankong.png"
+      },
+      {
+        "pagePath": "pages/record/record",
+        "text": "记录",
+        "iconPath": "/images/tubiao-off.png",
+        "selectedIconPath": "/images/tubiao.png"
+      },
+      {
+        "pagePath": "pages/setting/setting",
+        "text": "设置",
+        "iconPath": "/images/chilun-off.png",
+        "selectedIconPath": "/images/chilun.png"
+      }
+    ]
   }
 }

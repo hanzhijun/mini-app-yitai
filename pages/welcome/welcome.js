@@ -20,11 +20,17 @@ Page({
           url: '../login/login'
         })
       } else {
-        wx.redirectTo({
-          url: '../detail/detail'
+        wx.switchTab({
+          url: '../detail/detail',
+          success(res) {
+            console.log('成功')
+          },
+          fail(res) {
+            console.log('失败')
+          }
         })
       }
-    },500);
+    },3000);
   },
   onHide() {
     clearInterval(this.data.timer)

@@ -40,7 +40,7 @@ Page({
                 app.globalData.userInfo = res.successData;
                 Util.putCookie('accessToken', res.successData.accessToken, 3600);
                 Util.putCookie('username', res.successData.username, 3600);
-                wx.navigateTo({
+                wx.switchTab({
                     url: '../detail/detail'
                 })
             } else if (res.retCode == '10007') {
