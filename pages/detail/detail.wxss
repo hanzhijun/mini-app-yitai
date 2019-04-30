@@ -1,47 +1,98 @@
 /**index.wxss**/
 view {
   display: block;
-  text-align: left;
+  text-align: center;
 }
 
-view.text {
-  padding-left: 72rpx;
+.xin-outbar {
+  width: 440rpx;
+  height: 440rpx;
+  margin: 120rpx auto 0;
+  position: relative;
 }
 
-.index_outside {
-    line-height: 70rpx;
-    font-size: 14px;
-    padding: 80rpx 0 0 50rpx;
+.xin-outbar .bj-img {
+  width: 440rpx;
+  height: 440rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
-.detail-bar {
-  clear: both;
-  display: block;
-  padding-top: 50rpx;
+.xin-outbar .bpm {
+  width: 440rpx;
+  line-height: 44rpx;
+  font-size: 26rpx;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: 80rpx;
+  z-index: 2;
 }
 
-.detail-bar li {
-  display: block;
+.xin-outbar .text-xintiao {
+  width: 220rpx;
+  height: 60rpx;
+  font-size: 54rpx;
+  color: #fff;
+  text-align: right;
+  position: absolute;
+  left: 0;
+  top: 118rpx;
+  z-index: 2;
+}
+
+.xin-outbar .icon-xin {
+  width: 36rpx;
+  height: 36rpx;
+  position: absolute;
+  left: 236rpx;
+  top: 135rpx;
+  z-index: 2;
+}
+
+.xin-outbar .text-huxi {
+  width: 220rpx;
+  height: 60rpx;
+  font-size: 54rpx;
+  color: #fff;
+  text-align: right;
+  position: absolute;
+  left: 0;
+  top: 249rpx;
+  z-index: 2;
+}
+
+.xin-outbar .icon-huxi {
+  width: 36rpx;
+  height: 36rpx;
+  position: absolute;
+  left: 236rpx;
+  top: 264rpx;
+  z-index: 2;
+}
+
+.xin-outbar .ci {
+  width: 440rpx;
+  line-height: 44rpx;
+  font-size: 26rpx;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: 315rpx;
+  z-index: 2;
+}
+
+.bed-outbar .bed-state {
+  font-size: 30rpx;
+  color: #0099e9;
+  padding: 50rpx 0 40rpx;
   overflow: hidden;
-  height: 100rpx;
 }
 
-.detail-bar .icon view {
-  width: 215rpx;
-  height: 120rpx;
-  float: left;
-  text-align: center;
-}
-
-.detail-bar .icon view image {
-  width: 80rpx;
-  height: 80rpx;
-}
-
-.detail-bar .num view {
-  width: 215rpx;
-  height: 40rpx;
-  line-height: 40rpx;
-  float: left;
-  text-align: center;
+.bed-outbar image {
+  width: 400rpx;
+  height: 278rpx;
 }

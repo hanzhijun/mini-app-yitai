@@ -1,47 +1,17 @@
-/**index.wxss**/
+/**setting.wxss**/
 view {
   display: block;
-  text-align: left;
-}
-
-view.text {
-  padding-left: 72rpx;
-}
-
-.index_outside {
-    line-height: 70rpx;
-    font-size: 14px;
-    padding: 80rpx 0 0 50rpx;
-}
-
-.detail-bar {
-  clear: both;
-  display: block;
-  padding-top: 50rpx;
-}
-
-.detail-bar li {
-  display: block;
-  overflow: hidden;
-  height: 100rpx;
-}
-
-.detail-bar .icon view {
-  width: 215rpx;
-  height: 120rpx;
-  float: left;
   text-align: center;
 }
 
-.detail-bar .icon view image {
-  width: 80rpx;
-  height: 80rpx;
+.set_outside {
+  width: 100vw;
+  height: 100vh;
+  background-color: #ededed;
 }
 
-.detail-bar .num view {
-  width: 215rpx;
-  height: 40rpx;
-  line-height: 40rpx;
-  float: left;
-  text-align: center;
+.set_outside image {
+  width: 650rpx;
+  height: 600rpx;
+  margin: 100rpx auto 0;
 }

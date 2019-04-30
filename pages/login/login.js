@@ -23,7 +23,7 @@ Page({
         })
     },
     /**
-     * 用户名密码登录
+     * 02. 用户名密码登录
      */
     toLogin() {
         let {inputValue, inputPassWords} = this.data;

@@ -1,12 +1,12 @@
 <!--index.wxml-->
 <view class="detail_outside">
     <view class="logo">
-        <image src="http://www.hanjiaxin.cn/images/logo-yitai-480.png"></image>
+        <image src="http://www.hanjiaxin.cn/images/logo-yitai-480.png?v=0430"></image>
     </view>
 
     <ul class="text">
-        <li>智慧医疗产品，24小时智慧科技保姆; </li>
+        <li>智慧健康产品，24小时智慧科技保姆; </li>
         <li>不穿不戴，老幼全方位智慧照护;</li>
-        <li>智慧创新科技，优雅健康生活。 </li>
+        <li>智慧创新科技，优雅健康生活。</li>
     </ul>
 </view>
