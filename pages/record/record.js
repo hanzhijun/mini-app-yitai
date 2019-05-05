@@ -3,6 +3,8 @@
 const app = getApp();
 let Util = require('../../utils/storage.js');
 
+import * as echarts from '../../ec-canvas/echarts';
+
 Page({
   data: {
     userInfo: null,
@@ -40,14 +42,8 @@ Page({
         _this.getActual()
       }, 5000);
 
-      _this.setSocketTask();
+      // _this.setSocketTask();
     }
-  },
-  onHide() {
-    clearInterval(this.data.timer)
-  },
-  onUnload() {
-    clearInterval(this.data.timer)
   },
   /**
    * 获取设备当前的状态/⼼率/呼吸/体动数据
@@ -74,72 +70,5 @@ Page({
     }, function (reg) {
       console.log(JSON.stringify(reg))
     })
-  },
-  /**
-   * 获取设备的告警配置信息
-   */
-  getBatch() {
-    let obj = {
-      deviceNos: app.globalData.deviceNos
-    };
-    let _this = this;
-    app.myAjax2('post', '/device/deviceConfig/batch', obj, function (res) {
-      if (res.retCode == '10000') {
-        console.log('请求成功');
-        _this.setData({
-          breath: res.successData[0].breath,
-          deviceStatus: res.successData[0].deviceStatus,
-          heart: res.successData[0].heart,
-          markTime: res.successData[0].markTime,
-          motion: res.successData[0].motion
-        });
-      } else {
-        console.log('未知错误')
-      }
-      console.log(JSON.stringify(res))
-    }, function (reg) {
-      console.log(JSON.stringify(reg))
-    })
-  },
-  setSocketTask() {
-    // let accessToken = Util.getCookie('accessToken');
-    // let deviceNo = this.data.deviceNo;
-    // //建立连接
-    // console.log('建立连接!');
-    // wx.connectSocket({
-    //   url: "ws://stream.darma.cn:18105/ws",
-    //   sluccess() {
-    //     console.log('连接成功...')
-    //   },
-    //   fail() {
-    //     console.log('连接失败...')
-    //   }
-    // });
-    // //连接成功
-    // wx.onSocketOpen(function() {
-    //   console.log('连接成功!');
-    //   let obj = {
-    //     // 消息类型msgType⽬前有 login（登录消息），deviceStatus（设备状态消息）healthData（⼼率呼吸数据消息），paramError（参数错误消息）
-    //     msgType: 'login',
-    //     msgData: {
-    //       token: accessToken,
-    //       // 订阅类型subType有“ALL”,“SINGLETON”(区分⼤⼩写);
-    //       subType: 'SINGLETON', /*订阅所有的设备*/
-    //       deviceNo: deviceNo
-    //     }
-    //   };
-    //   wx.sendSocketMessage({
-    //     data: JSON.stringify(obj),
-    //   })
-    // });
-    // //接收数据
-    // wx.onSocketMessage(function(data) {
-    //   console.info(data.data.byteLength);
-    //   console.log(data.data)
-    // });
-    // //连接失败
-    // wx.onSocketError(function() {
-    //   console.log('websocket连接失败！');
-    // })
   }
 });

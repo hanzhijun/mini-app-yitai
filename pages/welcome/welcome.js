@@ -20,17 +20,20 @@ Page({
           url: '../login/login'
         })
       } else {
-        wx.switchTab({
-          url: '../detail/detail',
-          success(res) {
-            console.log('成功')
-          },
-          fail(res) {
-            console.log('失败')
-          }
+        wx.redirectTo({
+          url: '../detail/detail'
         })
+        // wx.switchTab({
+        //   url: '../detail/detail',
+        //   success(res) {
+        //     console.log('成功')
+        //   },
+        //   fail(res) {
+        //     console.log('失败')
+        //   }
+        // })
       }
-    },3000);
+    },5000);
   },
   onHide() {
     clearInterval(this.data.timer)

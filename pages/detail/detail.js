@@ -13,10 +13,16 @@ Page({
     heart: null, // ⼼率值 65436_⽆效值，其他为正常值
     markTime: null, // 发⽣的时间戳
     motion: null, // 体动值 0_正常，3_轻微体动，4_中度体动，5_⼤幅体动，-100_⽆效值
-    timer: null
+    timer: null,
+    toast: 0,
+    toastTxt: '',
+    loading: 0,
+    warning: 0,
+    warningText: '',
+    leaveTime: null
   },
   onLoad() {
-
+    // app.showToast(this, '提示语操作');
   },
   onReady() {
   },
@@ -34,9 +40,9 @@ Page({
         accessToken: accessToken
       });
       _this.getActual();
-      _this.getBatch();
-      _this.history();
-      _this.deviceStatus();
+      // _this.getBatch();
+      // _this.history();
+      // _this.deviceStatus();
       _this.setSocketTask();
       _this.data.timer = setInterval(function () {
         _this.getActual()
@@ -61,6 +67,26 @@ Page({
     app.myAjax2('post', '/device/physiology/actual', obj, function (res) {
       if (res.retCode == '10000') {
         // console.log('请求成功');
+        if (res.successData[0].deviceStatus == 3 && _this.data.leaveTime) {
+          let time = Date.parse(new Date());
+          if (time - _this.data.leaveTime > 30) {
+            _this.setData({
+              warningText: '离床报警已触发',
+              warning: 1
+            });
+            wx.vibrateLong({
+              success: function () {
+                console.log('震动设置成功!')
+              },
+              fail: function () {
+                console.log('震动设置失败!')
+              },
+              complete: function () {
+                console.log('震动设置完成!')
+              }
+            })
+          }
+        }
         _this.setData({
           breath: res.successData[0].breath,
           deviceStatus: res.successData[0].deviceStatus,
@@ -252,6 +278,7 @@ Page({
   setSocketTask() {
     let accessToken = Util.getCookie('accessToken');
     let deviceNo = this.data.deviceNo;
+    let _this = this;
     //建立连接
     console.log('建立连接!');
     wx.connectSocket({
@@ -264,7 +291,7 @@ Page({
       }
     });
     //连接成功
-    wx.onSocketOpen(function() {
+    wx.onSocketOpen(function () {
       console.log('连接成功!');
       let obj = {
         // 消息类型msgType⽬前有 login（登录消息），deviceStatus（设备状态消息）healthData（⼼率呼吸数据消息），paramError（参数错误消息）
@@ -281,12 +308,31 @@ Page({
       })
     });
     //接收数据
-    wx.onSocketMessage(function(data) {
-      console.log('websocket返回数据');
-      console.log(data.data)
+    wx.onSocketMessage(function (data) {
+      // console.log('websocket返回数据');
+      // console.log(JSON.parse(data.data).msgType)
+      // heartBreathBcg、healthBreathData、deviceStatus
+      if (JSON.parse(data.data).msgType == 'healthBreathData' || JSON.parse(data.data).msgType == 'deviceStatus') {
+        console.log(data.data)
+      }
+      // 当状态发生变化会初始化时，会推送此条数据
+      if (JSON.parse(data.data).msgType == 'deviceStatus') {
+        if (JSON.parse(data.data).data.deviceStatus == '3') {
+          console.log('离床已记录，以此时间为基准开始计算报警数据');
+          _this.setData({
+            leaveTime: Date.parse(new Date())
+          });
+        } else {
+          _this.setData({
+            leaveTime: null
+          });
+          console.log('解除离床报警计算数据');
+        }
+      }
+
     });
     //连接失败
-    wx.onSocketError(function() {
+    wx.onSocketError(function () {
       console.log('websocket连接失败！');
     })
   }

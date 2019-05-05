@@ -99,5 +99,24 @@ App({
   hideLoad() {
     wx.hideLoading();
     isLoading = false
+  },
+  /**
+   * toast提示弹窗
+   * @param that
+   * @param text 提示文案
+   * @param time 弹窗展示时间 秒
+   */
+  showToast(that, text, time){
+    let _this = that;
+    _this.setData({
+      toast: 1,
+      toastTxt: text
+    });
+    setTimeout(function () {
+      _this.setData({
+        toast: 0,
+        toastTxt: ''
+      });
+    }, !time ? 3000 : time * 1000)
   }
 });

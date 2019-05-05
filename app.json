@@ -11,30 +11,5 @@
     "navigationBarBackgroundColor": "#ffdc9e",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "color": "#666",
-    "selectedColor": "#ffdc9e",
-    "backgroundColor": "#fff",
-    "list": [
-      {
-        "pagePath": "pages/detail/detail",
-        "text": "状态",
-        "iconPath": "/images/jiankong-off.png",
-        "selectedIconPath": "/images/jiankong.png"
-      },
-      {
-        "pagePath": "pages/record/record",
-        "text": "记录",
-        "iconPath": "/images/tubiao-off.png",
-        "selectedIconPath": "/images/tubiao.png"
-      },
-      {
-        "pagePath": "pages/setting/setting",
-        "text": "设置",
-        "iconPath": "/images/chilun-off.png",
-        "selectedIconPath": "/images/chilun.png"
-      }
-    ]
   }
 }
