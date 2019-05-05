@@ -36,7 +36,7 @@ Page({
     },5000);
   },
   onHide() {
-    clearInterval(this.data.timer)
+    clearInterval(this.data.timer);
   },
   onUnload() {
     clearInterval(this.data.timer)
